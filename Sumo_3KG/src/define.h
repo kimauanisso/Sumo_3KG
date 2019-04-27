@@ -42,4 +42,15 @@ Servo motorEsq;
 uint8_t dip1, dip2, dip3; //variáveis do DIP Switch
 uint8_t sensoresPresenca; //variável que armazena o estado de todos os sensores de presença
 
+//Protótipos de funções
+void lerSensores();
+void lerDIP();
+void buscaSimples(int, int, int, int);
+void moveRobo(int, int);
+void exibeSensores();
+void exibeDIP();
+void exibeReceptor(uint16_t, uint16_t, uint16_t);
+void controlaRobo(uint16_t, uint16_t);
+
+
 #endif
