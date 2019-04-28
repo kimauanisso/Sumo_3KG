@@ -42,6 +42,15 @@ Servo motorEsq;
 uint8_t dip1, dip2, dip3; //variáveis do DIP Switch
 uint8_t sensoresPresenca; //variável que armazena o estado de todos os sensores de presença
 
+//Variável para avanço full
+int flagAvanco = 0;
+
+//Variáveis de velocidade
+int velAvanco = 100;
+int velAlta = (int)velAvanco*0.8;
+int velMedia = (int)velAvanco*0.5;
+int velBaixa = (int)velAvanco*0.3;
+
 //Protótipos de funções
 void lerSensores();
 void lerDIP();

@@ -27,43 +27,102 @@ void lerDIP()
 /**************Funções de Busca**********/
 //Parametros
 //      velAvanco - velocidade de avanço para quando encontra algo
-//      
+//
 void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa)
 {
     //Começa verificando o sensor da frente, que é a prioridade
-    if(bitRead(sensoresPresenca, 3))
-        moveRobo(velAvanco, velAvanco);
+    if (bitRead(sensoresPresenca, 3))
+    {
+        if (flagAvanco < 5000)
+        {
+            moveRobo(velBaixa, velBaixa);
+            flagAvanco++;
+        }
+        else if ((flagAvanco >= 5000) && (flagAvanco < 10000))
+        {
+            moveRobo(velMedia, velMedia);
+            flagAvanco++;
+        }
+        else if ((flagAvanco >= 10000) && (flagAvanco < 15000))
+        {
+            moveRobo(velAlta, velAlta);
+            flagAvanco++;
+        }
+        else if (flagAvanco >= 15000)
+        {
+            moveRobo(velAvanco, velAvanco);
+            digitalWrite(13, HIGH);
+        }
+    }
     else
     {
         switch (sensoresPresenca)
         {
         case 0b10000001:
-            //Leitura apenas da lateral esquerda
-            moveRobo(velAlta, -velAlta);
+            //Leitura apenas da lateral direita
+            moveRobo(velAlta, -velMedia);
+            flagAvanco = 0;
             break;
         case 0b10000010:
-            //Leitura apenas da diagonal esquerda
-            moveRobo(velMedia, -velMedia);
+            //Leitura apenas da diagonal direita
+            moveRobo(velMedia, 0);
+            flagAvanco = 0;
             break;
         case 0b10000011:
-            //Leitura dos sensores diagonal e lateral esquerda
-            moveRobo(velMedia, -velMedia);
+            //Leitura dos sensores diagonal e lateral direita
+            moveRobo(velMedia, 0);
+            flagAvanco = 0;
             break;
         case 0b10000100:
-            //Leitura apenas da frente esquerda
+            //Leitura apenas da frente direita
             moveRobo(velMedia, velBaixa);
             break;
         case 0b10000110:
-            //Leitura da diagonal e frente esquerda
+            //Leitura da diagonal e frente direita
             moveRobo(velMedia, velBaixa);
             break;
         case 0b10000111:
-            //Leitura de todos os sensores da esquerda
+            //Leitura de todos os sensores da direita
             moveRobo(velMedia, velBaixa);
-            break;        
-        default:
             break;
-        }        
+        case 0b11000000:
+            //Leitura apenas da lateral esquerda
+            moveRobo(-velMedia, velAlta);
+            flagAvanco = 0;
+            break;
+        case 0b10100000:
+            //Leitura apenas da diagonal esquerda
+            moveRobo(0, velMedia);
+            flagAvanco = 0;
+            break;
+        case 0b10110000:
+            // Leitura dos sensores diagonal e lateral esquerda
+            moveRobo(0, velMedia);
+            break;
+        case 0b10010000:
+            // Leitura apenas da frente esquerda
+            moveRobo(velBaixa, velMedia);
+            break;
+        case 0b11100000:
+            //Leitura da diagonal e frente esquerda
+            moveRobo(velBaixa, velMedia);
+            flagAvanco = 0;
+            break;
+        case 0b11110000:
+            //Leitura de todos os sensores da esquerda
+            moveRobo(velBaixa, velMedia);
+            break;
+        case 0b10000000:
+            //Leitura de nenhum sensor
+            moveRobo(0,0);
+            flagAvanco = 0;
+            break;
+        default:
+            //Caso não mapeado na lógica
+            moveRobo(0,0);
+            flagAvanco = 0;
+            break;
+        }
     }
 }
 
@@ -72,16 +131,16 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa)
 //Parametros velEsq e velDir - velocidades dos motores de -100 a 100
 void moveRobo(int velEsq, int velDir)
 {
-    velEsq = map(velEsq, -100,100,1010, 2013);
-    velDir = map(velDir, -100,100,985, 1985);
+    velEsq = map(velEsq, -100, 100, 1010, 2013);
     motorEsq.writeMicroseconds(velEsq);
+    velDir = map(velDir, -100, 100, 1100, 1800); //,985, 1985
     motorDir.writeMicroseconds(velDir);
 }
 
 void controlaRobo(uint16_t Ch1, uint16_t Ch2)
 {
-    int velEsq = map(Ch1, 980, 2010, -100, 100);
-    int velDir = map(Ch2, 980, 2010, -100, 100);
+    int velEsq = map(Ch1, 1000, 2000, -100, 100);
+    int velDir = map(Ch2, 1000, 2000, -100, 100);
     moveRobo(velEsq, velDir);
 }
 
