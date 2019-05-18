@@ -24,7 +24,7 @@
 //Sensores de Linha
 #define PIN_SL_DIR A5
 #define PIN_SL_ESQ A6
-//Motores 
+//Motores
 #define PIN_MOT_DIR A4
 #define PIN_MOT_ESQ A3
 
@@ -32,6 +32,7 @@
 //deltaT -> Tamanho do pulso do sinal de Servo do receptor
 //tZero_CH1 -> Guarda o tempo inicial de leitura do sinal do receptor
 volatile uint16_t deltaT_CH1, deltaT_CH2, deltaT_CH3;
+static uint16_t deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp;
 uint16_t tZero_CH1, tZero_CH2, tZero_CH3;
 
 //Variáveis dos motores
@@ -39,27 +40,24 @@ Servo motorDir;
 Servo motorEsq;
 
 //Variáveis de sensores e outros inputs
-uint8_t dip1, dip2, dip3; //variáveis do DIP Switch
+uint8_t valorDIP;         //variáveis dos estados do DIP Switch
 uint8_t sensoresPresenca; //variável que armazena o estado de todos os sensores de presença
 
 //Variável para avanço full
 int flagAvanco = 0;
 
-//Variáveis de velocidade
-int velAvanco = 100;
-int velAlta = (int)velAvanco*0.8;
-int velMedia = (int)velAvanco*0.5;
-int velBaixa = (int)velAvanco*0.3;
-
 //Protótipos de funções
 void lerSensores();
 void lerDIP();
+void lerReceptor();
 void buscaSimples(int, int, int, int);
 void moveRobo(int, int);
 void exibeSensores();
 void exibeDIP();
 void exibeReceptor(uint16_t, uint16_t, uint16_t);
 void controlaRobo(uint16_t, uint16_t);
-
+void frente(int, int, int);
+void cedilha(int, int, int, char);
+void gira180(int, int, int);
 
 #endif

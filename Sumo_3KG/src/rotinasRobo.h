@@ -19,9 +19,43 @@ void lerSensores()
 void lerDIP()
 {
     //Função de leitura do DIP Switch
-    dip1 = !digitalRead(PIN_DIP1);
-    dip2 = !digitalRead(PIN_DIP2);
-    dip3 = !digitalRead(PIN_DIP3);
+    valorDIP = 0b11111100;
+    bitWrite(valorDIP, 0, digitalRead(PIN_DIP2));
+    bitWrite(valorDIP, 1, digitalRead(PIN_DIP3));
+}
+
+void lerReceptor()
+{
+    noInterrupts();
+    deltaT_CH1_Temp = deltaT_CH1;
+    deltaT_CH2_Temp = deltaT_CH2;
+    deltaT_CH3_Temp = deltaT_CH3;
+    interrupts();
+}
+
+/***********Pré Rotinas******************/
+void frente(int velEsq, int velDir, int tempo)
+{
+    moveRobo(velEsq, velDir);
+    delay(tempo);
+    moveRobo(0, 0);
+}
+
+void cedilha(int velMenor, int velMaior, int tempo, char lado)
+{
+    if (lado == 'D' || lado == 'd')
+        moveRobo(velMenor, velMaior);
+    else
+        moveRobo(velMaior, velMenor);
+    delay(tempo);
+    moveRobo(0, 0);
+}
+
+void gira180(int velE, int velD, int tempo)
+{
+    moveRobo(velE, velD);
+    delay(tempo);
+    moveRobo(0, 0);
 }
 
 /**************Funções de Busca**********/
@@ -35,17 +69,17 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa)
     {
         if (flagAvanco < 5000)
         {
-            moveRobo(velBaixa, velBaixa);
+            moveRobo(velAvanco / 5, velAvanco / 5);
             flagAvanco++;
         }
         else if ((flagAvanco >= 5000) && (flagAvanco < 10000))
         {
-            moveRobo(velMedia, velMedia);
+            moveRobo(velAvanco / 4, velAvanco / 4);
             flagAvanco++;
         }
         else if ((flagAvanco >= 10000) && (flagAvanco < 15000))
         {
-            moveRobo(velAlta, velAlta);
+            moveRobo(velAvanco / 2, velAvanco / 2);
             flagAvanco++;
         }
         else if (flagAvanco >= 15000)
@@ -78,7 +112,7 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa)
             moveRobo(velMedia, velBaixa);
             break;
         case 0b10000110:
-            //Leitura da diagonal e frente direita
+            // Leitura da diagonal e frente direita
             moveRobo(velMedia, velBaixa);
             break;
         case 0b10000111:
@@ -114,12 +148,12 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa)
             break;
         case 0b10000000:
             //Leitura de nenhum sensor
-            moveRobo(0,0);
+            moveRobo(0, 0);
             flagAvanco = 0;
             break;
         default:
             //Caso não mapeado na lógica
-            moveRobo(0,0);
+            moveRobo(0, 0);
             flagAvanco = 0;
             break;
         }
@@ -132,8 +166,8 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa)
 void moveRobo(int velEsq, int velDir)
 {
     velEsq = map(velEsq, -100, 100, 1010, 2013);
+    velDir = map(velDir, -100, 100, 1000, 2000); //1100, 1800
     motorEsq.writeMicroseconds(velEsq);
-    velDir = map(velDir, -100, 100, 1100, 1800); //,985, 1985
     motorDir.writeMicroseconds(velDir);
 }
 
@@ -154,11 +188,7 @@ void exibeSensores()
 void exibeDIP()
 {
     //Função de exibição dos valores do DIP Switch
-    Serial.print(dip1);
-    Serial.print(" ");
-    Serial.print(dip2);
-    Serial.print(" ");
-    Serial.println(dip3);
+    Serial.println(valorDIP, BIN);
 }
 
 void exibeReceptor(uint16_t CH1, uint16_t CH2, uint16_t CH3)
