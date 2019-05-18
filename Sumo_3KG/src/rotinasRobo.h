@@ -167,15 +167,15 @@ void movimentoInicial(void) {
       break;
     case 0b11111110:
       // Serial.println("Frente");
-      frente(100, 65, 100);
+      frente(100, 65, 120);
       break;
     case 0b11111101:
       if (deltaT_CH3_Temp > 1800) {
         // Serial.println("Cedilha Esq");
-        cedilha(100, 40, 100, 'D');
+        cedilha(100, 30, 100, 'D');
       } else {
         // Serial.println("Cedilha Dir");
-        cedilha(100, 65, 100, 'e');
+        cedilha(100, 45, 100, 'e');
       }
       break;
     case 0b11111100:
