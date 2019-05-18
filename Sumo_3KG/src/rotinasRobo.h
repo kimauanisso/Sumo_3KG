@@ -167,20 +167,20 @@ void movimentoInicial(void) {
       break;
     case 0b11111110:
       // Serial.println("Frente");
-      frente(100, 65, 140);
+      frente(100, 65, 100);
       break;
     case 0b11111101:
       if (deltaT_CH3_Temp > 1800) {
         // Serial.println("Cedilha Esq");
-        cedilha(100, 40, 235, 'D');
+        cedilha(100, 40, 100, 'D');
       } else {
         // Serial.println("Cedilha Dir");
-        cedilha(100, 65, 180, 'e');
+        cedilha(100, 65, 100, 'e');
       }
       break;
     case 0b11111100:
       // Serial.println("Gira 180");
-      gira180(100, -100, 120);
+      gira180(100, -100, 80);
       break;
     default:
       // Serial.println("Erro");

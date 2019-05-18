@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <Servo.h>
+#include <string.h>
 
 /************Definição de pinos*************/
 // Receptor
