@@ -5,13 +5,13 @@
 // Organiza um byte com os sete sensores IR de presença
 // NA LAT_ESQ DIAG_ESQ FRENTE_ESQ FRENTE FRENTE_DIR DIAG_DIR LAT_DIR
 void lerSensores() {
-  bitWrite(sensoresPresenca, 0, !digitalRead(PIN_SP_LDIR));
+  bitWrite(sensoresPresenca, 0, !digitalRead(PIN_SP_FDIR));
   bitWrite(sensoresPresenca, 1, !digitalRead(PIN_SP_DDIR));
-  bitWrite(sensoresPresenca, 2, !digitalRead(PIN_SP_FDIR));
-  bitWrite(sensoresPresenca, 3, !digitalRead(PIN_SP_F));
+  bitWrite(sensoresPresenca, 2, !digitalRead(PIN_SP_F));
+  bitWrite(sensoresPresenca, 3, !digitalRead(PIN_SP_DESQ));
   bitWrite(sensoresPresenca, 4, !digitalRead(PIN_SP_FESQ));
-  bitWrite(sensoresPresenca, 5, !digitalRead(PIN_SP_DESQ));
-  bitWrite(sensoresPresenca, 6, !digitalRead(PIN_SP_LESQ));
+  bitWrite(sensoresPresenca, 5, 1);
+  bitWrite(sensoresPresenca, 6, 1);
   bitWrite(sensoresPresenca, 7, 1);
 }
 
