@@ -74,65 +74,48 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
     }
   } else {
     switch (sensoresPresenca) {
-      case 0b10000001:
-        // Leitura apenas da lateral direita
-        moveRobo(velAlta, -velMedia);
-        flagAvanco = 0;
-        break;
-      case 0b10000010:
-        // Leitura apenas da diagonal direita
-        moveRobo(velMedia, 0);
-        flagAvanco = 0;
-        break;
-      case 0b10000011:
-        // Leitura dos sensores diagonal e lateral direita
-        moveRobo(velMedia, 0);
-        flagAvanco = 0;
-        break;
-      case 0b10000100:
-        // Leitura apenas da frente direita
-        moveRobo(velMedia, velBaixa);
-        break;
-      case 0b10000110:
-        // Leitura da diagonal e frente direita
-        moveRobo(velMedia, velBaixa);
-        break;
-      case 0b10000111:
-        // Leitura de todos os sensores da direita
-        moveRobo(velMedia, velBaixa);
-        break;
-      case 0b11000000:
-        // Leitura apenas da lateral esquerda
-        moveRobo(-velMedia, velAlta);
-        flagAvanco = 0;
-        break;
-      case 0b10100000:
-        // Leitura apenas da diagonal esquerda
-        moveRobo(0, velMedia);
-        flagAvanco = 0;
-        break;
-      case 0b10110000:
-        // Leitura dos sensores diagonal e lateral esquerda
-        moveRobo(0, velMedia);
-        break;
-      case 0b10010000:
-        // Leitura apenas da frente esquerda
-        moveRobo(velBaixa, velMedia);
-        break;
       case 0b11100000:
-        // Leitura da diagonal e frente esquerda
-        moveRobo(velBaixa, velMedia);
-        flagAvanco = 0;
-        break;
-      case 0b11110000:
-        // Leitura de todos os sensores da esquerda
-        moveRobo(velBaixa, velMedia);
-        break;
-      case 0b10000000:
-        // Leitura de nenhum sensor
+        // Nenhum sensor esta lendo ok
         moveRobo(0, 0);
         flagAvanco = 0;
         break;
+      case 0b11100001:
+        // Leitura apena do frente direita ok
+        moveRobo(velMedia, velBaixa);
+        flagAvanco = 0;
+        break;
+      case 0b11100010:
+        // Leitura apenas da diagonal direita
+        moveRobo(velMedia, velBaixa);
+        break;
+      case 0b11101000:
+        // Leitura apenas da diagonal esquerda
+        moveRobo(velMedia, velBaixa);
+        break;
+      case 0b11101001:
+        // Leitura de diagonal esquerda e frente direita ok
+        moveRobo(velMedia, velBaixa);
+        break;
+      case 0b11110000:
+        // Leitura apenas da frente esquerda ok
+        moveRobo(velBaixa, velMedia);
+        flagAvanco = 0;
+        break;
+      case 0b11110010:
+        // Leitura de frente esquerda e diagonal direita ok
+        moveRobo(velBaixa, velMedia);
+        flagAvanco = 0;
+        break;
+        // case 0b10110000:
+        //   // Leitura dos sensores diagonal e lateral esquerda
+        //   moveRobo(0, velMedia);
+        //   break;
+
+        // case 0b11110000:
+        //   // Leitura de todos os sensores da esquerda
+        //   moveRobo(velBaixa, velMedia);
+        //   break;
+
       default:
         // Caso não mapeado na lógica
         moveRobo(0, 0);

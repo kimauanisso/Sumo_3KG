@@ -30,12 +30,12 @@ void setup() {
 }
 
 void loop() {
-   lerReceptor();
-   controlaRobo(deltaT_CH1_Temp, deltaT_CH2_Temp);
+   //lerReceptor();
+   //controlaRobo(deltaT_CH1_Temp, deltaT_CH2_Temp);
   // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
 
- // lerSensores();
-  //exibeSensores();
+ lerSensores();
+ exibeSensores();
   //   lerReceptor();
   //   if (deltaT_CH3_Temp < 1900 && deltaT_CH3_Temp > 1100) {
   //     controlaRobo(deltaT_CH1_Temp, deltaT_CH2_Temp);
