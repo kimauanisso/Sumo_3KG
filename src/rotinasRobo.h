@@ -39,9 +39,9 @@ void frente(int velEsq, int velDir, int tempo) {
 
 void cedilha(int velMenor, int velMaior, int tempo, char lado) {
   if (lado == 'D' || lado == 'd')
-    moveRobo(velMenor, velMaior);
+    moveRobo(-velMenor, -velMaior);
   else
-    moveRobo(velMaior, velMenor);
+    moveRobo(-velMaior, -velMenor);
   delay(tempo);
   moveRobo(0, 0);
 }
@@ -58,7 +58,7 @@ void gira180(int velE, int velD, int tempo) {
 //
 void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
   // Começa verificando o sensor da frente, que é a prioridade
-  if (bitRead(sensoresPresenca, 2)) {
+  if (bitRead(sensoresPresenca, 3)) {
     if (flagAvanco < 5000) {
       moveRobo(velAvanco / 5, velAvanco / 5);
       flagAvanco++;
@@ -82,26 +82,28 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
       // Sensores da lateral
       case 0b10000001:
         // Leitura sensor lat dir
-        moveRobo(velAlta, -velMedia);
+        // moveRobo(0, 0);
+        moveRobo(velAlta, -velAlta);
         flagAvanco = 0;
         break;
       case 0b11000000:
         // Leitura sensor lat esq
-        moveRobo(-velMedia, velAlta);
+        // moveRobo(0, 0);
+        moveRobo(-velAlta, velAlta);
         flagAvanco = 0;
         break;
 
       // Sensores das diagonais
       case 0b10000100:
         // Leitura apenas da diagonal direita
-        moveRobo(0, 0);
-        // moveRobo(-velMedia, velMedia);
+        // moveRobo(0, 0);
+        moveRobo(-velMedia, velMedia);
         flagAvanco = 0;
         break;
       case 0b10010000:
         // Leitura apenas da diagonal esquerda
-        moveRobo(0, 0);
-        // moveRobo(velMedia, -velMedia);
+        // moveRobo(0, 0);
+        moveRobo(velMedia, -velMedia);
         flagAvanco = 0;
         break;
 
@@ -122,25 +124,27 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
       // Combinações FDIR
       case 0b10010010:
         // Frente direita + Diag Esq
-        moveRobo(0, 0);
-        // moveRobo(velMedia, velBaixa);
+        // moveRobo(0, 0);
+        moveRobo(velMedia, velBaixa);
         break;
       case 0b10000110:
         // Leitura de frente direita e diagonal direita
-        moveRobo(0, 0);
+        // moveRobo(0, 0);
+        moveRobo(-velBaixa, velMedia);
         flagAvanco = 0;
         break;
 
       // Combinações FESQ
       case 0b10100100:
         // Leitura de frente esquerda e diagonal direita
-        moveRobo(0, 0);
-        // moveRobo(velBaixa, velMedia);
+        // moveRobo(0, 0);
+        moveRobo(velBaixa, velMedia);
         flagAvanco = 0;
         break;
       case 0b10110000:
         // Leitura de frente esquerda e diagonal esquerda
-        moveRobo(0, 0);
+        // moveRobo(0, 0);
+        moveRobo(velMedia, -velBaixa);
         flagAvanco = 0;
         break;
 
@@ -179,20 +183,20 @@ void movimentoInicial(void) {
       break;
     case 0b11111110:
       // Serial.println("Frente");
-      frente(100, 65, 120);
+      frente(100, 100, 250);
       break;
     case 0b11111101:
       if (deltaT_CH3_Temp > 1800) {
         // Serial.println("Cedilha Esq");
-        cedilha(100, 30, 100, 'D');
+        cedilha(100, 35, 180, 'D');
       } else {
         // Serial.println("Cedilha Dir");
-        cedilha(100, 45, 100, 'e');
+        cedilha(100, 35, 180, 'e');
       }
       break;
     case 0b11111100:
       // Serial.println("Gira 180");
-      gira180(100, -100, 80);
+      gira180(100, -100, 130);
       break;
     default:
       // Serial.println("Erro");

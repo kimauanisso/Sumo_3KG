@@ -32,22 +32,26 @@ void setup() {
 }
 
 void loop() {
+  //   lerSensores();
+  //   exibeSensores();
+  //   lerDIP();
+  //   exibeDIP();
   lerReceptor();
   if (deltaT_CH3_Temp < 1900 && deltaT_CH3_Temp > 1100) {
     controlaRobo(deltaT_CH1_Temp, deltaT_CH2_Temp);
     // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp,deltaT_CH3_Temp);
   } else {
-    //     lerDIP();
-    //     delay(1000);
-    //     // exibeDIP();
-    //     movimentoInicial();
+    lerDIP();
+    delay(1000);
+    // exibeDIP();
+    movimentoInicial();
 
     // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
 
     while (deltaT_CH3_Temp > 1800 || deltaT_CH3_Temp < 1200) {
       lerReceptor();
       lerSensores();
-      buscaSimples(0, 80, 50, 25);  //(0, 70, 50, 30);
+      buscaSimples(0, 70, 50, 20);  //(0, 70, 50, 30);
       // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
     }
   }
