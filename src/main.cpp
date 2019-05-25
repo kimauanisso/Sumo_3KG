@@ -39,13 +39,13 @@ void loop() {
     // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
   } else {
     lerDIP();
-    delay(1000);
+    delay(4850);
     // exibeDIP();
     movimentoInicial();
     while (deltaT_CH3_Temp > 1800 || deltaT_CH3_Temp < 1200) {
       lerReceptor();
       lerSensores();
-      buscaSimples(0, 60, 40, 30);  //(0, 70, 50, 30);
+      buscaSimples(100, 60, 38, 30);  //(0, 70, 50, 30);
       // exibeSensores();
     }
   }

@@ -172,10 +172,10 @@ void movimentoInicial(void) {
     case 0b11111101:
       if (deltaT_CH3_Temp > 1800) {
         // Serial.println("Cedilha Esq");
-        cedilha(95, 45, 180, 'e');
+        cedilha(95, 55, 180, 'e');
       } else {
         // Serial.println("Cedilha Dir");
-        cedilha(90, 70, 160, 'D');
+        cedilha(95, 65, 170, 'D');
         //Arrumar dps
         // moveRobo(0,0);
         // delay(60);
