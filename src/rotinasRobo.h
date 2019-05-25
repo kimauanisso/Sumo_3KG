@@ -82,43 +82,48 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
       // Sensores da lateral
       case 0b10000001:
         // Leitura sensor lat dir
-        moveRobo(velAlta, -velAlta);
+        moveRobo(velAlta, -velMedia);
         flagAvanco = 0;
         break;
       case 0b11000000:
         // Leitura sensor lat esq
-        moveRobo(-velAlta, velAlta);
+        moveRobo(-velMedia, velAlta);
         flagAvanco = 0;
         break;
 
       // Sensores das diagonais
       case 0b10000100:
         // Leitura apenas da diagonal direita
-        moveRobo(-velMedia, velMedia);
+        moveRobo(0, 0);
+        // moveRobo(-velMedia, velMedia);
         flagAvanco = 0;
         break;
       case 0b10010000:
         // Leitura apenas da diagonal esquerda
-        moveRobo(velMedia, -velMedia);
+        moveRobo(0, 0);
+        // moveRobo(velMedia, -velMedia);
         flagAvanco = 0;
         break;
 
       // Sensores da frente
       case 0b10000010:
         // Leitura apenas do frente direita
-        moveRobo(velMedia, velBaixa);
+        moveRobo(0, 0);
+        // moveRobo(velMedia, velBaixa);
         flagAvanco = 0;
         break;
       case 0b10100000:
         // Leitura apenas da frente esquerda
-        moveRobo(velBaixa, velMedia);
+        moveRobo(0, 0);
+        // moveRobo(velBaixa, velMedia);
         flagAvanco = 0;
         break;
 
       // Combinações FDIR
       case 0b10010010:
         // Frente direita + Diag Esq
-        moveRobo(velMedia, velBaixa);
+        moveRobo(0, 0);
+        // moveRobo(velMedia, velBaixa);
         break;
       case 0b10000110:
         // Leitura de frente direita e diagonal direita
@@ -129,7 +134,8 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
       // Combinações FESQ
       case 0b10100100:
         // Leitura de frente esquerda e diagonal direita
-        moveRobo(velBaixa, velMedia);
+        moveRobo(0, 0);
+        // moveRobo(velBaixa, velMedia);
         flagAvanco = 0;
         break;
       case 0b10110000:
