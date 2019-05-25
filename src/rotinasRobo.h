@@ -37,7 +37,7 @@ void frente(int velEsq, int velDir, int tempo) {
   moveRobo(0, 0);
 }
 
-void cedilha(int velMenor, int velMaior, int tempo, char lado) {
+void cedilha(int velMaior, int velMenor, int tempo, char lado) {
   if (lado == 'D' || lado == 'd')
     moveRobo(velMenor, velMaior);
   else
@@ -112,7 +112,7 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
         flagAvanco = 0;
         break;
       case 0b10110000:
-        // Leitura dos sensores diagonal e lateral esquerda
+        // Leitura dos sensores diagonal e frente esquerda
         moveRobo(0, velMedia);
         break;
       case 0b10010000:
@@ -120,7 +120,7 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
         moveRobo(velBaixa, velMedia);
         break;
       case 0b11100000:
-        // Leitura da diagonal e frente esquerda
+        // Leitura da diagonal e lateral esquerda
         moveRobo(velBaixa, velMedia);
         flagAvanco = 0;
         break;
@@ -172,15 +172,20 @@ void movimentoInicial(void) {
     case 0b11111101:
       if (deltaT_CH3_Temp > 1800) {
         // Serial.println("Cedilha Esq");
-        cedilha(100, 30, 100, 'D');
+        cedilha(100, 60, 180, 'e');
       } else {
         // Serial.println("Cedilha Dir");
-        cedilha(100, 45, 100, 'e');
+        cedilha(90, 65, 180, 'D');
+        //Arrumar dps
+        // moveRobo(0,0);
+        // delay(60);
+        // moveRobo(100, 100);
+        // delay(40);
       }
       break;
     case 0b11111100:
       // Serial.println("Gira 180");
-      gira180(100, -100, 80);
+      gira180(100, -100, 100);
       break;
     default:
       // Serial.println("Erro");
