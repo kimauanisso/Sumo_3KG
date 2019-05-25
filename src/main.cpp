@@ -9,6 +9,8 @@ void setup() {
   motorEsq.attach(PIN_MOT_ESQ, 1000, 2000);
 
   // Configuração dos Sensores
+  pinMode(PIN_SP_LDIR, INPUT_PULLUP);
+  pinMode(PIN_SP_LESQ, INPUT_PULLUP);
   pinMode(PIN_SP_DDIR, INPUT_PULLUP);
   pinMode(PIN_SP_FDIR, INPUT_PULLUP);
   pinMode(PIN_SP_F, INPUT_PULLUP);
@@ -30,26 +32,23 @@ void setup() {
 }
 
 void loop() {
-   //lerReceptor();
-   //controlaRobo(deltaT_CH1_Temp, deltaT_CH2_Temp);
-  // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
+  lerReceptor();
+  if (deltaT_CH3_Temp < 1900 && deltaT_CH3_Temp > 1100) {
+    controlaRobo(deltaT_CH1_Temp, deltaT_CH2_Temp);
+    // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp,deltaT_CH3_Temp);
+  } else {
+    //     lerDIP();
+    //     delay(1000);
+    //     // exibeDIP();
+    //     movimentoInicial();
 
- lerSensores();
- exibeSensores();
-  //   lerReceptor();
-  //   if (deltaT_CH3_Temp < 1900 && deltaT_CH3_Temp > 1100) {
-  //     controlaRobo(deltaT_CH1_Temp, deltaT_CH2_Temp);
-  //     // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
-  //   } else {
-  //     lerDIP();
-  //     delay(1000);
-  //     // exibeDIP();
-  //     movimentoInicial();
-  //     while (deltaT_CH3_Temp > 1800 || deltaT_CH3_Temp < 1200) {
-  //       lerReceptor();
-  //       lerSensores();
-  //       buscaSimples(0, 60, 40, 30);  //(0, 70, 50, 30);
-  //       // exibeSensores();
-  //     }
-  //   }
+    // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
+
+    while (deltaT_CH3_Temp > 1800 || deltaT_CH3_Temp < 1200) {
+      lerReceptor();
+      lerSensores();
+      buscaSimples(0, 80, 50, 25);  //(0, 70, 50, 30);
+      // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
+    }
+  }
 }

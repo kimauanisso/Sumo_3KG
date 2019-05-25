@@ -12,9 +12,11 @@
 #define PIN_CH3 A2
 // Sensores de Presença
 #define PIN_SP_F 6
+#define PIN_SP_LDIR 8
+#define PIN_SP_LESQ 9
 #define PIN_SP_FDIR 7
 #define PIN_SP_FESQ 11
-#define PIN_SP_DDIR 8
+#define PIN_SP_DDIR 12
 #define PIN_SP_DESQ 10
 // DIP Switch
 #define PIN_DIP1 4
