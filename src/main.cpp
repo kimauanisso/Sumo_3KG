@@ -51,7 +51,7 @@ void loop() {
     while (deltaT_CH3_Temp > 1800 || deltaT_CH3_Temp < 1200) {
       lerReceptor();
       lerSensores();
-      buscaSimples(100, 70, 50, 20);  //(0, 70, 50, 30);
+      buscaSimples(0, 70, 50, 20);  //(0, 70, 50, 30);
       // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
     }
   }

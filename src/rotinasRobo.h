@@ -76,7 +76,15 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
     switch (sensoresPresenca) {
       case 0b10000000:
         // Nenhum sensor esta lendo
-        moveRobo(0, 0);
+        if(millis() - tZero_Busca > deltaT_Busca)
+      {
+        tZero_Busca = millis();
+        moveRobo(100,100);
+        delay(50);
+        moveRobo(0,0);
+      } else {
+        moveRobo(0,0);
+      }
         flagAvanco = 0;
         break;
       // Sensores da lateral
@@ -179,7 +187,7 @@ void movimentoInicial(void) {
   switch (valorDIP) {
     case 0b11111111:
       // Serial.println("Parado");
-      moveRobo(0, 0);
+        moveRobo(0,0);
       break;
     case 0b11111110:
       // Serial.println("Frente");
