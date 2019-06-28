@@ -37,7 +37,7 @@ void frente(int velEsq, int velDir, int tempo) {
   moveRobo(0, 0);
 }
 
-void cedilha(int velMenor, int velMaior, int tempo, char lado) {
+void escape(int velMenor, int velMaior, int tempo, char lado) {
   if (lado == 'D' || lado == 'd')
     moveRobo(-velMenor, -velMaior);
   else
@@ -76,8 +76,8 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
     switch (sensoresPresenca) {
       case 0b10000000:
         // Nenhum sensor esta lendo
-        if(millis() - tZero_Busca > deltaT_Busca)
-      {
+        //Busca tranquinho
+        if(millis() - tZero_Busca > deltaT_Busca){
         tZero_Busca = millis();
         moveRobo(100,100);
         delay(50);
@@ -195,11 +195,11 @@ void movimentoInicial(void) {
       break;
     case 0b11111101:
       if (deltaT_CH3_Temp > 1800) {
-        // Serial.println("Cedilha Esq");
-        cedilha(100, 35, 180, 'D');
+        // Serial.println("Escape Esq");
+        escape(100, 35, 180, 'D');
       } else {
-        // Serial.println("Cedilha Dir");
-        cedilha(100, 35, 180, 'e');
+        // Serial.println("Escape Dir");
+        escape(100, 35, 180, 'e');
       }
       break;
     case 0b11111100:
