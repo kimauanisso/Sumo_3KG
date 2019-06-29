@@ -36,6 +36,10 @@ volatile uint16_t deltaT_CH1, deltaT_CH2, deltaT_CH3;
 static uint16_t deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp;
 uint16_t tZero_CH1, tZero_CH2, tZero_CH3;
 
+//Variaveis da busca tranquinho
+unsigned int tzero_Busca=0;
+const  unsigned int deltaT_Busca = 1000; 
+
 // Variáveis dos motores
 Servo motorDir;
 Servo motorEsq;

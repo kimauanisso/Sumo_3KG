@@ -132,6 +132,15 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
         break;
       case 0b10000000:
         // Leitura de nenhum sensor
+        //Busca tranquinho
+        if(millis() - tzero_Busca > deltaT_Busca){
+          tzero_Busca = millis();
+          moveRobo(100,100);
+          delay(50);
+          moveRobo(0,0);
+        } else{ 
+          moveRobo(0,0);
+        }
         moveRobo(0, 0);
         flagAvanco = 0;
         break;
