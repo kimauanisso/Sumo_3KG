@@ -52,9 +52,18 @@ void gira180(int velE, int velD, int tempo) {
   moveRobo(0, 0);
 }
 
+void escape(int velMaior, int velMenor, int tempo, char lado){
+  if (lado == 'D'|| lado == 'd')
+    moveRobo(velMenor,velMaior);
+  else
+    moveRobo(velMaior,velMenor);
+  delay(tempo);
+  moveRobo(0,0);
+ }
+
 /**************Funções de Busca**********/
 // Parametros
-//      velAvanco - velocidade de avanço para quando encontra algo
+// velAvanco - velocidade de avanço para quando encontra algo
 //
 void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
   // Começa verificando o sensor da frente, que é a prioridade
@@ -159,16 +168,60 @@ void controlaRobo(uint16_t Ch1, uint16_t Ch2) {
 }
 
 /*******Funções de controle******/
+// void movimentoInicial(void) {
+//   switch (valorDIP) {
+//     case 0b11111111:
+//       // Serial.println("Parado");
+//       moveRobo(0, 0);
+//       break;
+//     case 0b11111110:
+//       // Serial.println("Frente");
+//       frente(100, 65, 120);
+//       break;
+//     case 0b11111101:
+//       if (deltaT_CH3_Temp > 1800) {
+//         // Serial.println("Cedilha Esq");
+//         cedilha(95, 55, 180, 'e');
+//       } else {
+//         // Serial.println("Cedilha Dir");
+//         cedilha(95, 65, 170, 'D');
+//         //Arrumar dps
+//         // moveRobo(0,0);
+//         // delay(60);
+//         // moveRobo(100, 100);
+//         // delay(40);
+//       }
+//       break;
+//     case 0b11111100:
+//       // Serial.println("Gira 180");
+//       gira180(100, -100, 60);
+//       break;
+//     default:
+//       // Serial.println("Erro");
+//       break;
+//   }
+// }
+/********* Funções de controle 2.0 **********/
 void movimentoInicial(void) {
   switch (valorDIP) {
     case 0b11111111:
-      // Serial.println("Parado");
+    if (deltaT_CH3_Temp > 1800){
+      //Parado
       moveRobo(0, 0);
+    }else{
+      //Cedilha Fake
+      gira180(100,-100,30);
+    }
       break;
+
     case 0b11111110:
-      // Serial.println("Frente");
-      frente(100, 65, 120);
+      if (deltaT_CH3_Temp > 1800){
+        frente(100, 65, 120);
+      }else{
+        gira180(100, -100, 60);
+      }
       break;
+
     case 0b11111101:
       if (deltaT_CH3_Temp > 1800) {
         // Serial.println("Cedilha Esq");
@@ -183,10 +236,21 @@ void movimentoInicial(void) {
         // delay(40);
       }
       break;
+
     case 0b11111100:
-      // Serial.println("Gira 180");
-      gira180(100, -100, 60);
-      break;
+      if (deltaT_CH3_Temp > 1800){
+        //escape(-100,-20,70,'D');
+        gira180(100,-100,15);
+        delay(20);
+        frente(-100,-80,70);
+
+      }else{
+        //escape(-100,-20,70,'e');
+        gira180(-100,100,10);
+        delay(20);
+        //frente(-100,-80,70);
+      }
+     break;
     default:
       // Serial.println("Erro");
       break;
