@@ -52,14 +52,7 @@ void gira180(int velE, int velD, int tempo) {
   moveRobo(0, 0);
 }
 
-void escape(int velMaior, int velMenor, int tempo, char lado){
-  if (lado == 'D'|| lado == 'd')
-    moveRobo(velMenor,velMaior);
-  else
-    moveRobo(velMaior,velMenor);
-  delay(tempo);
-  moveRobo(0,0);
- }
+
 
 /**************Funções de Busca**********/
 // Parametros
@@ -239,13 +232,11 @@ void movimentoInicial(void) {
 
     case 0b11111100:
       if (deltaT_CH3_Temp > 1800){
-        //escape(-100,-20,70,'D');
         gira180(100,-100,15);
         delay(20);
         frente(-100,-80,70);
 
       }else{
-        //escape(-100,-20,70,'e');
         gira180(-100,100,10);
         delay(20);
         //frente(-100,-80,70);
