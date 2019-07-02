@@ -240,6 +240,7 @@ void movimentoInicial(void) {
       break;
 
     case 0b11111100:
+    //Escape
       if (deltaT_CH3_Temp > 1800){
         gira180(100,-100,15);
         delay(20);

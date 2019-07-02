@@ -6,6 +6,8 @@
 #include <string.h>
 
 /************Definição de pinos*************/
+// Módulo Start
+#define PIN_START 13
 // Receptor
 #define PIN_CH1 A0
 #define PIN_CH2 A1

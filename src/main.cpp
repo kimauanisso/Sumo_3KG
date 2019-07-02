@@ -9,6 +9,9 @@ void setup() {
   motorDir.attach(PIN_MOT_DIR, 1000, 2000);
   motorEsq.attach(PIN_MOT_ESQ, 1000, 2000);
 
+  // Configuração Módulo de Start
+  pinMode(PIN_START, INPUT);
+
   // Configuração dos Sensores
   pinMode(PIN_SP_LDIR, INPUT_PULLUP);
   pinMode(PIN_SP_DDIR, INPUT_PULLUP);
@@ -34,11 +37,16 @@ void setup() {
 
 void loop() {
   lerReceptor();
+  // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
   if (deltaT_CH3_Temp < 1900 && deltaT_CH3_Temp > 1100) {
     controlaRobo(deltaT_CH1_Temp, deltaT_CH2_Temp);
     // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
   } else {
     lerDIP();
+    while(digitalRead(PIN_START))
+    {
+      delay(1);
+    }
     delay(4850);
     // exibeDIP();
     movimentoInicial();
@@ -49,4 +57,4 @@ void loop() {
       // exibeSensores();
     }
   }
-}
+ }
