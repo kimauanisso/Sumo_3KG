@@ -191,20 +191,24 @@ void movimentoInicial(void) {
       break;
     case 0b11111110:
       // Serial.println("Frente");
-      frente(100, 100, 250);
+      frente(100, 100, 210);
       break;
     case 0b11111101:
       if (deltaT_CH3_Temp > 1800) {
         // Serial.println("Escape Esq");
-        escape(100, 35, 180, 'D');
+        gira180(100,-100,70);
+        delay(50);
+        frente(-100,-100,125);
       } else {
         // Serial.println("Escape Dir");
-        escape(100, 35, 180, 'e');
+        gira180(-100,100,70);
+        delay(50);
+        frente(-100,-100,140);
       }
       break;
     case 0b11111100:
       // Serial.println("Gira 180");
-      gira180(100, -100, 130);
+      gira180(100, -100, 115);
       break;
     default:
       // Serial.println("Erro");

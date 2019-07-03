@@ -6,6 +6,8 @@
 #include <string.h>
 
 /************Definição de pinos*************/
+//Módulo de Start
+#define PIN_START A6
 // Receptor
 #define PIN_CH1 A0
 #define PIN_CH2 A1
@@ -38,7 +40,7 @@ uint16_t tZero_CH1, tZero_CH2, tZero_CH3;
 
 //Variáveis da busca tranquinho
 unsigned int tZero_Busca=0;
-const unsigned int deltaT_Busca = 1000;
+const unsigned int deltaT_Busca = 5000;
 
 // Variáveis dos motores
 Servo motorDir;
