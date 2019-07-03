@@ -135,8 +135,8 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
         //Busca tranquinho
         if(millis() - tzero_Busca > deltaT_Busca){
           tzero_Busca = millis();
-          moveRobo(100,100);
-          delay(50);
+          moveRobo(100,60);
+          delay(40);
           moveRobo(0,0);
         } else{ 
           moveRobo(0,0);
@@ -212,15 +212,15 @@ void movimentoInicial(void) {
       moveRobo(0, 0);
     }else{
       //Cedilha Fake
-      gira180(100,-100,30);
+      gira180(100,-100,55);
     }
       break;
 
     case 0b11111110:
       if (deltaT_CH3_Temp > 1800){
-        frente(100, 65, 120);
+        frente(100, 65, 160);
       }else{
-        gira180(100, -100, 60);
+        gira180(100, -100, 95);
       }
       break;
 
