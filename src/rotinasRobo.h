@@ -227,10 +227,10 @@ void movimentoInicial(void) {
     case 0b11111101:
       if (deltaT_CH3_Temp > 1800) {
         // Serial.println("Cedilha Esq");
-        cedilha(95, 55, 180, 'e');
+        cedilha(100, 50, 225, 'e');
       } else {
         // Serial.println("Cedilha Dir");
-        cedilha(95, 65, 170, 'D');
+        cedilha(95, 65, 200, 'D');
         //Arrumar dps
         // moveRobo(0,0);
         // delay(60);
@@ -242,14 +242,14 @@ void movimentoInicial(void) {
     case 0b11111100:
     //Escape
       if (deltaT_CH3_Temp > 1800){
-        gira180(100,-100,15);
-        delay(20);
-        frente(-100,-80,70);
+        gira180(100,-100,40);
+        delay(35);
+        frente(-100,-65,100);
 
       }else{
-        gira180(-100,100,10);
-        delay(20);
-        //frente(-100,-80,70);
+        gira180(-100,100,45);
+        delay(35);
+        //frente(-100,-65,100);
       }
      break;
     default:
