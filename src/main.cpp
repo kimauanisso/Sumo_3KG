@@ -48,8 +48,10 @@ void loop() {
     delay(4850);
     // exibeDIP();
     movimentoInicial();
+    tzero_Busca = millis();
     // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
-    while (deltaT_CH3_Temp > 1800 || deltaT_CH3_Temp < 1200) {
+    while (digitalRead(PIN_START) == 0); 
+    {
       lerReceptor();
       lerSensores();
       buscaSimples(0, 70, 50, 20);  //(0, 70, 50, 30);
