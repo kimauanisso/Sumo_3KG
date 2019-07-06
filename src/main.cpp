@@ -31,31 +31,28 @@ void setup() {
   digitalWrite(13, LOW);
 }
 
-void loop() {
-    // lerSensores();
-    // exibeSensores();
-    // lerDIP();
-    // exibeDIP();
+void loop() { 
   lerReceptor();
   if (deltaT_CH3_Temp < 1900 && deltaT_CH3_Temp > 1100) {
     controlaRobo(deltaT_CH1_Temp, deltaT_CH2_Temp);
     // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp,deltaT_CH3_Temp);
   } else {
     lerDIP();
-    // while (digitalRead(PIN_START)){
-    //   delay(1);
-    // }
+    while (digitalRead(PIN_START))
+    {
+    delay(1);
+    }
     delay(4850);
     // exibeDIP();
     movimentoInicial();
-    tzero_Busca = millis();
-    // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
-    while (digitalRead(PIN_START) == 0); 
-    {
-      lerReceptor();
-      lerSensores();
-      buscaSimples(0, 70, 50, 20);  //(0, 70, 50, 30);
-      // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
+    tZero_Busca= millis();
+     while (digitalRead(PIN_START) == 0)
+     {
+        lerReceptor();
+        lerSensores();
+        buscaSimples(0, 70, 50, 20);  
+        //(0, 70, 50, 30)
+     }
+      moveRobo(0,0);
     }
-  }
 }
