@@ -169,41 +169,8 @@ void controlaRobo(uint16_t Ch1, uint16_t Ch2) {
   moveRobo(velEsq, velDir);
 }
 
-/*******Funções de controle******/
-// void movimentoInicial(void) {
-//   switch (valorDIP) {
-//     case 0b11111111:
-//       // Serial.println("Parado");
-//       moveRobo(0, 0);
-//       break;
-//     case 0b11111110:
-//       // Serial.println("Frente");
-//       frente(100, 65, 120);
-//       break;
-//     case 0b11111101:
-//       if (deltaT_CH3_Temp > 1800) {
-//         // Serial.println("Cedilha Esq");
-//         cedilha(95, 55, 180, 'e');
-//       } else {
-//         // Serial.println("Cedilha Dir");
-//         cedilha(95, 65, 170, 'D');
-//         //Arrumar dps
-//         // moveRobo(0,0);
-//         // delay(60);
-//         // moveRobo(100, 100);
-//         // delay(40);
-//       }
-//       break;
-//     case 0b11111100:
-//       // Serial.println("Gira 180");
-//       gira180(100, -100, 60);
-//       break;
-//     default:
-//       // Serial.println("Erro");
-//       break;
-//   }
-// }
-/********* Funções de controle 2.0 **********/
+
+/********* Funções de controle **********/
 void movimentoInicial(void) {
   switch (valorDIP) {
     case 0b11111111:
@@ -227,15 +194,11 @@ void movimentoInicial(void) {
     case 0b11111101:
       if (deltaT_CH3_Temp > 1800) {
         // Serial.println("Cedilha Esq");
-        cedilha(100, 50, 225, 'e');
+        cedilha(100, 55, 270, 'e'); //(50,225)(50,260)
       } else {
         // Serial.println("Cedilha Dir");
-        cedilha(95, 65, 200, 'D');
-        //Arrumar dps
-        // moveRobo(0,0);
-        // delay(60);
-        // moveRobo(100, 100);
-        // delay(40);
+        cedilha(95, 65, 215, 'D'); //(65,200)
+      
       }
       break;
 
