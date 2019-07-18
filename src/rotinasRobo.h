@@ -91,13 +91,13 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
       case 0b10000001:
         // Leitura sensor lat dir
         // moveRobo(0, 0);
-        moveRobo(velAlta, -velAlta);
+        moveRobo((velAlta+10), (-velAlta-10));
         flagAvanco = 0;
         break;
       case 0b11000000:
         // Leitura sensor lat esq
         // moveRobo(0, 0);
-        moveRobo(-velAlta, velAlta);
+        moveRobo((-velAlta-10), (velAlta+10));
         flagAvanco = 0;
         break;
 
@@ -196,19 +196,19 @@ void movimentoInicial(void) {
     case 0b11111101:
       if (deltaT_CH3_Temp > 1800) {
         // Serial.println("Escape Esq");
-        gira180(100,-100,70);
+        gira180(100,-100,30);
         delay(50);
         frente(-100,-100,125);
       } else {
         // Serial.println("Escape Dir");
-        gira180(-100,100,70);
+        gira180(-100,100,30);
         delay(50);
         frente(-100,-100,140);
       }
       break;
     case 0b11111100:
       // Serial.println("Gira 180");
-      gira180(100, -100, 115);
+      gira180(100, -100, 100);
       break;
     default:
       // Serial.println("Erro");
