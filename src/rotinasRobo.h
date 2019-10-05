@@ -38,7 +38,7 @@ void frente(int velEsq, int velDir, int tempo) {
 }
 
 void escape(int velMenor, int velMaior, int tempo, char lado) {
-  if (lado == 'D' || lado == 'd')
+  if (lado == 'E' || lado == 'e')
     moveRobo(-velMenor, -velMaior);
   else
     moveRobo(-velMaior, -velMenor);
@@ -196,14 +196,15 @@ void movimentoInicial(void) {
     case 0b11111101:
       if (deltaT_CH3_Temp > 1800) {
         // Serial.println("Escape Esq");
-        gira180(100,-100,30);
-        delay(50);
-        frente(-100,-100,125);
+         gira180(100,-100,40);
+         delay(20);
+         frente(-100,-100,160);
+        //escape(30,100,200,'E');
       } else {
         // Serial.println("Escape Dir");
-        gira180(-100,100,30);
-        delay(50);
-        frente(-100,-100,140);
+        gira180(-100,100,40);
+        delay(20);
+        frente(-100,-100,80);
       }
       break;
     case 0b11111100:
