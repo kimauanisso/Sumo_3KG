@@ -6,5 +6,9 @@
     "terminal.integrated.env.osx": {
         "PATH": "/Users/giovannikenez/.platformio/penv/bin:/Users/giovannikenez/.platformio/penv:/anaconda2/bin:/Users/giovannikenez/anaconda3/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/anaconda3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public",
         "PLATFORMIO_CALLER": "vscode"
+    },
+    "terminal.integrated.env.linux": {
+        "PATH": "/home/rnicola/.platformio/penv/bin:/home/rnicola/.platformio/penv:/home/rnicola/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/cuda/bin",
+        "PLATFORMIO_CALLER": "vscode"
     }
 }

@@ -202,9 +202,9 @@ void movimentoInicial(void) {
         //escape(30,100,200,'E');
       } else {
         // Serial.println("Escape Dir");
-        gira180(-100,100,40);
-        delay(20);
-        frente(-100,-100,80);
+        gira180(-100,100,50);
+        delay(60);
+        frente(-100,-100,140);
       }
       break;
     case 0b11111100:
