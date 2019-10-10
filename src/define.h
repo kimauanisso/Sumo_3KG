@@ -62,11 +62,16 @@ void lerReceptor();
 // funções de busca e movimentação
 void buscaSimples(int, int, int, int);
 void controlaRobo(uint16_t, uint16_t);
-void frente(int, int, int);
-void cedilha(int, int, int, char);
-void gira180(int, int, int);
+void moveDelay(int, int, int);
 void moveRobo(int, int);
 void movimentoInicial(void);
+// funções de mvto inicial
+void cedilha(char);
+void cedilhaPerfeito(char);
+void setePerfeito(char);
+void escape(char);
+void giro180();
+void giro90();
 // funções de exibição
 void exibeSensores();
 void exibeDIP();
