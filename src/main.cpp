@@ -48,7 +48,7 @@ void loop() {
     {
       delay(1);
     }
-    delay(4850);
+    //delay(4850);
     // exibeDIP();
     movimentoInicial();
     tzero_Busca = millis();
@@ -57,7 +57,7 @@ void loop() {
      {
         lerReceptor();
         lerSensores();
-        buscaSimples(0, 60, 38, 30);  //(0, 70, 50, 30);
+        buscaSimples(0, 60, 42, 30);  //(0, 70, 50, 30);
       // exibeSensores();
      } 
      moveRobo(0,0);

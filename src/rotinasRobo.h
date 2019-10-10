@@ -97,7 +97,7 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
         break;
       case 0b10000110:
         // Leitura da diagonal e frente direita
-        moveRobo(velMedia, velBaixa);
+        moveRobo(velMedia, 0);
         break;
       case 0b10000111:
         // Leitura de todos os sensores da direita
@@ -135,7 +135,7 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
         //Busca tranquinho
         if(millis() - tzero_Busca > deltaT_Busca){
           tzero_Busca = millis();
-          moveRobo(100,60);
+          moveRobo(100,100);
           delay(40);
           moveRobo(0,0);
         } else{ 
@@ -179,25 +179,27 @@ void movimentoInicial(void) {
       moveRobo(0, 0);
     }else{
       //Cedilha Fake
-      gira180(100,-100,55);
+      gira180(100,-100,40);
     }
       break;
 
     case 0b11111110:
       if (deltaT_CH3_Temp > 1800){
-        frente(100, 65, 160);
+        frente(100, 100, 160);
       }else{
-        gira180(100, -100, 95);
+        gira180(100, -100, 80);
       }
       break;
 
     case 0b11111101:
       if (deltaT_CH3_Temp > 1800) {
         // Serial.println("Cedilha Esq");
-        cedilha(100, 55, 270, 'e'); //(50,225)(50,260)
+        cedilha(100, 57, 280, 'e'); //(50,225)(50,260)
+        cedilha(100, 25, 40, 'e');
       } else {
         // Serial.println("Cedilha Dir");
-        cedilha(95, 65, 215, 'D'); //(65,200)
+        cedilha(100, 60, 260, 'D'); //(65,200)
+        cedilha(100, 25, 40, 'D');
       
       }
       break;
@@ -205,14 +207,17 @@ void movimentoInicial(void) {
     case 0b11111100:
     //Escape
       if (deltaT_CH3_Temp > 1800){
+        //cedilha(-100,-50,180,'D');
         gira180(100,-100,40);
-        delay(35);
-        frente(-100,-65,100);
+        delay(20);
+        frente(-100,-100,130);
+        gira180(-100,100,30);
 
       }else{
-        gira180(-100,100,45);
-        delay(35);
-        //frente(-100,-65,100);
+        gira180(-100,100,40);
+        //delay(35);
+        frente(-100,-100,140);
+        gira180(100,-100,30);
       }
      break;
     default:
