@@ -185,7 +185,12 @@ void movimentoInicial(void) {
 
     case 0b11111110:
       if (deltaT_CH3_Temp > 1800){
-        frente(100, 100, 160);
+        //frente(100, 100, 160);
+        gira180(100,-100,46);
+        delay(60);
+        frente(100,100,160);
+        gira180(-100,100,50);
+        //7  direita
       }else{
         gira180(100, -100, 80);
       }
