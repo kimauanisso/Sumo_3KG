@@ -57,7 +57,7 @@ void loop() {
      {
         lerReceptor();
         lerSensores();
-        buscaSimples(0, 60, 38, 30);  //(0, 70, 50, 30);
+        buscaSimples(100, 60, 42, 30);  //(0, 70, 50, 30);
       // exibeSensores();
      } 
      moveRobo(0,0);

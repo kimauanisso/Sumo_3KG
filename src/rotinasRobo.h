@@ -3,7 +3,7 @@
 /********Funções de Leitura*******************/
 // Leitura dos sensores de presença
 // Organiza um byte com os sete sensores IR de presença
-// NA LAT_ESQ DIAG_ESQ FRENTE_ESQ FRENTE FRENTE_DIR DIAG_DIR LAT_DIR
+// NA LAT_ESQ DIAG_ESQ moveDelay_ESQ moveDelay moveDelay_DIR DIAG_DIR LAT_DIR
 void lerSensores() {
   bitWrite(sensoresPresenca, 0, !digitalRead(PIN_SP_LDIR));
   bitWrite(sensoresPresenca, 1, !digitalRead(PIN_SP_DDIR));
@@ -31,25 +31,70 @@ void lerReceptor() {
 }
 
 /***********Pré Rotinas******************/
-void frente(int velEsq, int velDir, int tempo) {
+void moveDelay(int velEsq, int velDir, int tempo) {
   moveRobo(velEsq, velDir);
   delay(tempo);
   moveRobo(0, 0);
 }
 
-void cedilha(int velMaior, int velMenor, int tempo, char lado) {
-  if (lado == 'D' || lado == 'd')
-    moveRobo(velMenor, velMaior);
-  else
-    moveRobo(velMaior, velMenor);
-  delay(tempo);
-  moveRobo(0, 0);
+void cedilha(char lado) {
+  if (lado == 'D' || lado == 'd') {
+    moveDelay(65, 100, 320);
+    moveDelay(-100, 100, 20);
+  } else {
+    moveDelay(100, 55, 320);
+    moveDelay(100, -100, 20);
+  }
 }
 
-void gira180(int velE, int velD, int tempo) {
-  moveRobo(velE, velD);
-  delay(tempo);
-  moveRobo(0, 0);
+void cedilhaPerfeito(char lado) {
+  if (lado == 'D' || lado == 'd') {
+    moveDelay(100,-100,60);
+    delay(80);
+    moveDelay(75, 100, 320);
+  } else {
+    moveDelay(-100,100,60);
+    delay(80);
+    moveDelay(100, 65, 320);
+  }
+}
+
+void giro180() {
+  moveDelay(100,-100,90);
+}
+
+void giro90() {
+  moveDelay(100,-100,40);
+}
+
+void escape(char lado) {
+  if (lado == 'D' || lado == 'd') {
+    moveDelay(-100,100,60);
+    delay(60);
+    moveDelay(-100,-100,130);
+    moveDelay(100,-100,30);
+  } else {
+    moveDelay(100,-100,60);
+    delay(60);
+    moveDelay(-100,-100,130);
+    moveDelay(-100,100,30);
+  }
+}
+
+void setePerfeito(char lado) {
+  if (lado == 'D' || lado == 'd') {
+    moveDelay(100,-100,45);
+    delay(80);
+    moveDelay(100,100,160);
+    delay(40);
+    moveDelay(-100,100,45);
+  } else {
+    moveDelay(-100,100,40);
+    delay(80);
+    moveDelay(100,100,160);
+    delay(40);
+    moveDelay(100,-100,60);
+  }
 }
 
 
@@ -59,7 +104,7 @@ void gira180(int velE, int velD, int tempo) {
 // velAvanco - velocidade de avanço para quando encontra algo
 //
 void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
-  // Começa verificando o sensor da frente, que é a prioridade
+  // Começa verificando o sensor da moveDelay, que é a prioridade
   if (bitRead(sensoresPresenca, 3)) {
     if (flagAvanco < 5000) {
       moveRobo(velAvanco / 5, velAvanco / 5);
@@ -92,12 +137,12 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
         flagAvanco = 0;
         break;
       case 0b10000100:
-        // Leitura apenas da frente direita
+        // Leitura apenas da moveDelay direita
         moveRobo(velMedia, velBaixa);
         break;
       case 0b10000110:
-        // Leitura da diagonal e frente direita
-        moveRobo(velMedia, velBaixa);
+        // Leitura da diagonal e moveDelay direita
+        moveRobo(velMedia, 0);
         break;
       case 0b10000111:
         // Leitura de todos os sensores da direita
@@ -114,11 +159,11 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
         flagAvanco = 0;
         break;
       case 0b10110000:
-        // Leitura dos sensores diagonal e frente esquerda
+        // Leitura dos sensores diagonal e moveDelay esquerda
         moveRobo(0, velMedia);
         break;
       case 0b10010000:
-        // Leitura apenas da frente esquerda
+        // Leitura apenas da moveDelay esquerda
         moveRobo(velBaixa, velMedia);
         break;
       case 0b11100000:
@@ -135,10 +180,10 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
         //Busca tranquinho
         if(millis() - tzero_Busca > deltaT_Busca){
           tzero_Busca = millis();
-          moveRobo(100,60);
+          moveRobo(100,100);
           delay(40);
           moveRobo(0,0);
-        } else{ 
+        } else{
           moveRobo(0,0);
         }
         moveRobo(0, 0);
@@ -173,50 +218,33 @@ void controlaRobo(uint16_t Ch1, uint16_t Ch2) {
 /********* Funções de controle **********/
 void movimentoInicial(void) {
   switch (valorDIP) {
-    case 0b11111111:
-    if (deltaT_CH3_Temp > 1800){
-      //Parado
-      moveRobo(0, 0);
-    }else{
-      //Cedilha Fake
-      gira180(100,-100,55);
-    }
+    case 0b11111111: // 2 OFF 3 OFF
+      if (deltaT_CH3_Temp > 1800) // Cima
+        moveRobo(0, 0);
+      else                        // Baixo
+        giro180();
+      break;
+    case 0b11111110: // 2 ON 3 OFF
+      if (deltaT_CH3_Temp > 1800) // Cima
+        setePerfeito('e');
+      else                        // Baixo
+        setePerfeito('D');       
       break;
 
-    case 0b11111110:
-      if (deltaT_CH3_Temp > 1800){
-        frente(100, 65, 160);
-      }else{
-        gira180(100, -100, 95);
-      }
+    case 0b11111101: // 2 OFF 3 ON
+      if (deltaT_CH3_Temp > 1800) // Cima
+        cedilhaPerfeito('e');
+      else                        // Baixo
+        cedilhaPerfeito('D');
       break;
 
-    case 0b11111101:
-      if (deltaT_CH3_Temp > 1800) {
-        // Serial.println("Cedilha Esq");
-        cedilha(100, 55, 270, 'e'); //(50,225)(50,260)
-      } else {
-        // Serial.println("Cedilha Dir");
-        cedilha(95, 65, 215, 'D'); //(65,200)
-      
-      }
+    case 0b11111100: // 2 ON 3 ON
+      if (deltaT_CH3_Temp > 1800) // Cima
+        escape('e');
+      else                        // Baixo
+        escape('d');
       break;
-
-    case 0b11111100:
-    //Escape
-      if (deltaT_CH3_Temp > 1800){
-        gira180(100,-100,40);
-        delay(35);
-        frente(-100,-65,100);
-
-      }else{
-        gira180(-100,100,45);
-        delay(35);
-        //frente(-100,-65,100);
-      }
-     break;
     default:
-      // Serial.println("Erro");
       break;
   }
 }
