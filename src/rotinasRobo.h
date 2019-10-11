@@ -40,8 +40,10 @@ void moveDelay(int velEsq, int velDir, int tempo) {
 void cedilha(char lado) {
   if (lado == 'D' || lado == 'd') {
     moveDelay(65, 100, 320);
+    moveDelay(-100, 100, 20);
   } else {
     moveDelay(100, 55, 320);
+    moveDelay(100, -100, 20);
   }
 }
 
@@ -86,9 +88,10 @@ void setePerfeito(char lado) {
     moveDelay(100,100,160);
     moveDelay(-100,100,60);
   } else {
-    moveDelay(-100,100,60);
-    delay(60);
+    moveDelay(-100,100,40);
+    delay(20);
     moveDelay(100,100,160);
+    delay(40);
     moveDelay(100,-100,60);
   }
 }
@@ -230,9 +233,9 @@ void movimentoInicial(void) {
 
     case 0b11111101: // 2 OFF 3 ON
       if (deltaT_CH3_Temp > 1800) // Cima
-        cedilhaPerfeito('e');
+        cedilha('e');
       else                        // Baixo
-        cedilhaPerfeito('D');
+        cedilha('D');
       break;
 
     case 0b11111100: // 2 ON 3 ON
