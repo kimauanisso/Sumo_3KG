@@ -221,9 +221,8 @@ void movimentoInicial(void) {
       if (deltaT_CH3_Temp > 1800) // Cima
         moveRobo(0, 0);
       else                        // Baixo
-        giro90();
+        giro180();
       break;
-
     case 0b11111110: // 2 ON 3 OFF
       if (deltaT_CH3_Temp > 1800) // Cima
         setePerfeito('e');
