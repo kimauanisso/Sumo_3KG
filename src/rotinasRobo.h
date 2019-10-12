@@ -80,7 +80,7 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
         if(millis() - tZero_Busca > deltaT_Busca){
         tZero_Busca = millis();
         moveRobo(100,100);
-        delay(50);
+        delay(150);
         moveRobo(0,0);
       } else {
         moveRobo(0,0);
