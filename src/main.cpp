@@ -56,20 +56,20 @@ void loop()
   else
   {
     lerDIP();
-    // while (digitalRead(PIN_START))
-    // {
-    //   delay(1);
-    // }
-    //delay(4850);
+    while (digitalRead(PIN_START))
+    {
+      delay(1);
+    }
+    delay(4850);
     // exibeDIP();
     movimentoInicial();
     tZero_Busca = millis();
-    //while (digitalRead(PIN_START) == 0)
-    while(deltaT_CH3_Temp > 1900 || deltaT_CH3_Temp < 1100)
+    // while (digitalRead(PIN_START) == 0)
+    while(digitalRead(PIN_START) == 0)
     {
       lerReceptor();
       lerSensores();
-      buscaSimples(0, 70, 50, 20);
+      buscaSimples(100, 70, 50, 20);
       //(0, 70, 50, 30)
     }
     moveRobo(0, 0);
