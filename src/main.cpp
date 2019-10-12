@@ -48,7 +48,7 @@ void loop() {
     {
       delay(1);
     }
-    //delay(4850);
+    delay(4850);
     // exibeDIP();
     movimentoInicial();
     tzero_Busca = millis();
