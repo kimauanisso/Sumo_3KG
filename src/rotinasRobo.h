@@ -49,13 +49,13 @@ void cedilha(char lado) {
 
 void cedilhaPerfeito(char lado) {
   if (lado == 'D' || lado == 'd') {
-    moveDelay(100,-100,70);
+    moveDelay(100,-100,60);
     delay(80);
-    moveDelay(75, 100, 280);
+    moveDelay(75, 100, 320);
   } else {
     moveDelay(-100,100,60);
     delay(80);
-    moveDelay(100, 65, 280);
+    moveDelay(100, 65, 320);
   }
 }
 
@@ -69,12 +69,12 @@ void giro90() {
 
 void escape(char lado) {
   if (lado == 'D' || lado == 'd') {
-    moveDelay(-100,100,70);
+    moveDelay(-100,100,60);
     delay(60);
     moveDelay(-100,-100,130);
     moveDelay(100,-100,30);
   } else {
-    moveDelay(100,-100,70);
+    moveDelay(100,-100,60);
     delay(60);
     moveDelay(-100,-100,130);
     moveDelay(-100,100,30);
@@ -83,13 +83,14 @@ void escape(char lado) {
 
 void setePerfeito(char lado) {
   if (lado == 'D' || lado == 'd') {
-    moveDelay(100,-100,60);
-    delay(60);
+    moveDelay(100,-100,45);
+    delay(80);
     moveDelay(100,100,160);
-    moveDelay(-100,100,60);
+    delay(40);
+    moveDelay(-100,100,45);
   } else {
     moveDelay(-100,100,40);
-    delay(20);
+    delay(80);
     moveDelay(100,100,160);
     delay(40);
     moveDelay(100,-100,60);
@@ -232,9 +233,9 @@ void movimentoInicial(void) {
 
     case 0b11111101: // 2 OFF 3 ON
       if (deltaT_CH3_Temp > 1800) // Cima
-        cedilha('e');
+        cedilhaPerfeito('e');
       else                        // Baixo
-        cedilha('D');
+        cedilhaPerfeito('D');
       break;
 
     case 0b11111100: // 2 ON 3 ON
