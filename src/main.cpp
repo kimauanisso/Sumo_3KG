@@ -44,20 +44,9 @@ void loop() {
     // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
   } else {
     lerDIP();
-    while(digitalRead(PIN_START))
-    {
-      delay(1);
-    }
-    delay(4850);
-    // exibeDIP();
     movimentoInicial();
-    tzero_Busca = millis();
-    //while (deltaT_CH3_Temp > 1800 || deltaT_CH3_Temp < 1200) {
-     while (digitalRead(PIN_START) == 0)
-     {
-        lerReceptor();
-        lerSensores();
-        buscaSimples(100, 60, 42, 30);  //(0, 70, 50, 30);
+    while (deltaT_CH3_Temp > 1800 || deltaT_CH3_Temp < 1200) {
+      controlaRobo(deltaT_CH1_Temp, deltaT_CH2_Temp);  
       // exibeSensores();
      } 
      moveRobo(0,0);
