@@ -36,7 +36,6 @@ void setup() {
 }
 
 void loop() {
-
   lerReceptor();
   // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
   if (deltaT_CH3_Temp < 1900 && deltaT_CH3_Temp > 1100) {
@@ -46,8 +45,23 @@ void loop() {
     lerDIP();
     movimentoInicial();
     while (deltaT_CH3_Temp > 1800 || deltaT_CH3_Temp < 1200) {
-      controlaRobo(deltaT_CH1_Temp, deltaT_CH2_Temp);  
-      // exibeSensores();
+      controlaRobo(deltaT_CH1_Temp, deltaT_CH2_Temp);
+      lerSensores();  
+      if (bitRead(sensoresPresenca, 3)) {
+        if (flagAvanco < 5000) {
+          moveRobo(20, 20);
+          flagAvanco++;
+        } else if ((flagAvanco >= 5000) && (flagAvanco < 10000)) {
+          moveRobo(30, 30);
+          flagAvanco++;
+        } else if ((flagAvanco >= 10000) && (flagAvanco < 15000)) {
+          moveRobo(50, 50);
+          flagAvanco++;
+        } else if (flagAvanco >= 15000) {
+          moveRobo(100, 100);
+          digitalWrite(13, HIGH);
+        }
+      } else flagAvanco = 0;
      } 
      moveRobo(0,0);
     }
