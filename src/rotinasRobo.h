@@ -60,13 +60,13 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
   // Começa verificando o sensor da frente, que é a prioridade
   if (bitRead(sensoresPresenca, 3)) {
     if (flagAvanco < 5000) {
-      moveRobo(velAvanco / 5, velAvanco / 5);
+      moveRobo(velAvanco / 2, velAvanco / 2);
       flagAvanco++;
     } else if ((flagAvanco >= 5000) && (flagAvanco < 10000)) {
-      moveRobo(velAvanco / 4, velAvanco / 4);
+      moveRobo(velAvanco/2, velAvanco/2);
       flagAvanco++;
     } else if ((flagAvanco >= 10000) && (flagAvanco < 15000)) {
-      moveRobo(velAvanco / 2, velAvanco / 2);
+      moveRobo(velAvanco, velAvanco);
       flagAvanco++;
     } else if (flagAvanco >= 15000) {
       moveRobo(velAvanco, velAvanco);
@@ -80,7 +80,7 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
         if(millis() - tZero_Busca > deltaT_Busca){
         tZero_Busca = millis();
         moveRobo(100,100);
-        delay(150);
+        delay(60);
         moveRobo(0,0);
       } else {
         moveRobo(0,0);
@@ -91,13 +91,13 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
       case 0b10000001:
         // Leitura sensor lat dir
         // moveRobo(0, 0);
-        moveRobo((velAlta+10), (-velAlta-10));
+        moveRobo((velAlta), (-velAlta));
         flagAvanco = 0;
         break;
       case 0b11000000:
         // Leitura sensor lat esq
         // moveRobo(0, 0);
-        moveRobo((-velAlta-10), (velAlta+10));
+        moveRobo((-velAlta), (velAlta));
         flagAvanco = 0;
         break;
 
@@ -118,13 +118,13 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
       // Sensores da frente
       case 0b10000010:
         // Leitura apenas do frente direita
-        moveRobo(0, 0);
+        moveRobo(velMedia, velBaixa);
         // moveRobo(velMedia, velBaixa);
         flagAvanco = 0;
         break;
       case 0b10100000:
         // Leitura apenas da frente esquerda
-        moveRobo(0, 0);
+        moveRobo(velBaixa, velMedia);
         // moveRobo(velBaixa, velMedia);
         flagAvanco = 0;
         break;
@@ -133,7 +133,7 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
       case 0b10010010:
         // Frente direita + Diag Esq
         // moveRobo(0, 0);
-        moveRobo(velMedia, velBaixa);
+        moveRobo(velMedia, -velBaixa);
         break;
       case 0b10000110:
         // Leitura de frente direita e diagonal direita
@@ -146,7 +146,7 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
       case 0b10100100:
         // Leitura de frente esquerda e diagonal direita
         // moveRobo(0, 0);
-        moveRobo(velBaixa, velMedia);
+        moveRobo(-velBaixa, velMedia);
         flagAvanco = 0;
         break;
       case 0b10110000:

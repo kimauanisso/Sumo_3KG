@@ -69,7 +69,7 @@ void loop()
     {
       lerReceptor();
       lerSensores();
-      buscaSimples(100, 70, 50, 30);
+      buscaSimples(100, 80, 70, 50);
       //(0, 70, 50, 30)
     }
     moveRobo(0, 0);
