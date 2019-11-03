@@ -40,7 +40,7 @@ uint16_t tZero_CH1, tZero_CH2, tZero_CH3;
 
 //Variáveis da busca tranquinho
 unsigned int tZero_Busca=0;
-const unsigned int deltaT_Busca = 1500;
+const unsigned int deltaT_Busca = 3000;
 
 // Variáveis dos motores
 Servo motorDir;

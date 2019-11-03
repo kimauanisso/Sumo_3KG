@@ -80,7 +80,7 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
         if(millis() - tZero_Busca > deltaT_Busca){
         tZero_Busca = millis();
         moveRobo(100,100);
-        delay(60);
+        delay(30);
         moveRobo(0,0);
       } else {
         moveRobo(0,0);
@@ -105,13 +105,13 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
       case 0b10000100:
         // Leitura apenas da diagonal direita
         // moveRobo(0, 0);
-        moveRobo(-velMedia, velMedia);
+        moveRobo(-velBaixa, velMedia);
         flagAvanco = 0;
         break;
       case 0b10010000:
         // Leitura apenas da diagonal esquerda
         // moveRobo(0, 0);
-        moveRobo(velMedia, -velMedia);
+        moveRobo(velMedia, -velBaixa);
         flagAvanco = 0;
         break;
 
