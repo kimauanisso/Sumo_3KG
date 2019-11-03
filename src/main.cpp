@@ -36,7 +36,6 @@ void setup() {
 }
 
 void loop() {
-
   lerReceptor();
   // exibeReceptor(deltaT_CH1_Temp, deltaT_CH2_Temp, deltaT_CH3_Temp);
   if (deltaT_CH3_Temp < 1900 && deltaT_CH3_Temp > 1100) {

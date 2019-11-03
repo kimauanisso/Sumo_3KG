@@ -49,18 +49,18 @@ void cedilha(char lado) {
 
 void cedilhaPerfeito(char lado) {
   if (lado == 'D' || lado == 'd') {
-    moveDelay(100,-100,60);
+    moveDelay(100,-100,50);
     delay(80);
     moveDelay(75, 100, 320);
   } else {
-    moveDelay(-100,100,60);
-    delay(80);
-    moveDelay(100, 65, 320);
+    moveDelay(-90,90,60);
+    delay(150);
+    moveDelay(100, 70, 320);
   }
 }
 
 void giro180() {
-  moveDelay(100,-100,90);
+  moveDelay(100,-100,80);
 }
 
 void giro90() {
