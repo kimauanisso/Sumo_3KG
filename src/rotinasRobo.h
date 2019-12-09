@@ -49,13 +49,13 @@ void cedilha(char lado) {
 
 void cedilhaPerfeito(char lado) {
   if (lado == 'D' || lado == 'd') {
-    moveDelay(100,-100,50);
+    moveDelay(100,-100,70);
     delay(80);
     moveDelay(75, 100, 320);
   } else {
-    moveDelay(-90,90,60);
-    delay(150);
-    moveDelay(100, 70, 320);
+    moveDelay(-90,90,70);
+    delay(80);
+    moveDelay(100, 60, 320);
   }
 }
 
@@ -181,7 +181,7 @@ void buscaSimples(int velAvanco, int velAlta, int velMedia, int velBaixa) {
         if(millis() - tzero_Busca > deltaT_Busca){
           tzero_Busca = millis();
           moveRobo(100,100);
-          delay(40);
+          delay(25);
           moveRobo(0,0);
         } else{
           moveRobo(0,0);
